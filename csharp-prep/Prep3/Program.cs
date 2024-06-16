@@ -42,7 +42,10 @@ class Program
             } 
 
             //number of guesses
-            
+            for (int i = 0; i < 100; i++)
+            {
+                Console.WriteLine($"You made {i} guesses.");
+            }
 
             //want to play again?
             Console.Write("Do you want to play again? ");
