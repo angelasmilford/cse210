@@ -1,96 +1,81 @@
 using System;
-using System.Net;
 
 class Program
 {
-
-}
-
-public class Journal
-{
-    //state
-    public List<Entry> _entries = new List<Entry>();
-
-    //behaviors
-    public void AddEntry(new Entry) //need parameter
+    static void Main(string[] args)
     {
-        Console.WriteLine("Please select one of the followint choices: ");
-        int response = 0;
-        response = int.Parse(Console.ReadLine());
+        //instance 
+        Journal theJournal = new Journal();
+        Entry anEntry = new Entry();
+        anEntry.Display();
 
-        Console.Write("1. Write");
-        Console.Write("2. Display");
-        Console.Write("3. Load");
-        Console.Write("4. Save");
-        Console.Write("5. Quit");
+    do {
+        const string MENU = "Please, select one of the following choices:\n1. Write\n2. Display\n3. Save\n4. Load\n5. Quit";
+        Console.WriteLine(MENU);
 
-        if (response == 1)
+        userInput = int.Parse(Console.ReadLine());
+        switch(userInput) //WRITE
         {
+            case 1:
+                Entry newEntry = new Entry();
 
-        }
-        else if (response == 2)
-        {
+                newEntry._date = DateTime.Today.ToString("MM/dd/yyyy");
+                newEntry._prompt = prompt.GetPrompt();
+                Console.WriteLine($"{newEntry._prompt}");
+                newEntry._answer = Console.ReadLine();
+                journal._entries.Add(newEntry);
+                break;
+            
+            //DISPLAY
+            case 2: 
+            journal.DisplayJournal();
+            break;
+            
+            //SAVE
+            case 3: 
+        
+            Console.WriteLine("What is the filename?");
+            string file = Console.ReadLine();
 
-        }
-        else if (response == 3)
-        {
+            using (StreamWriter outputFile = new StreamWriter(file))
+            {
+                // Add text to the file 
+                foreach (Entry entry in journal._entries)
+                {
+                    outputFile.WriteLine($"Date: {entry._date} - {entry._prompt} {entry._answer}");
+                }     
+            };
+            break;
+        
+            // LOAD
+            case 4: 
+            Console.WriteLine("Enter the name of the file: ");
+            string fileName = Console.ReadLine();
 
-        }
-        else if (response == 4)
-        {
+            if (File.Exists(fileName))
+            {
+                journal._entries.Clear();
+                string[] lines = System.IO.File.ReadAllLines(fileName);
 
-        }
-        else if (response == 5){
+                foreach (string line in lines)
+                {
+                    char[] separators = {':','-', '?'};
+                    Entry reader = new Entry();
+                    string[] parts = line.Split(separators);
 
-        }
-        else
-        {
-            Console.WriteLine("Please answer the question with a single number from 1-5.");
-        }
+                    reader._date = parts[1].Trim();
+                    reader._prompt = parts[2].Trim() + "?";
+                    reader._answer = parts[3].Trim();
+                    journal._entries.Add(reader);
+                }
+            }
 
-
-
+            else
+            {
+                Console.WriteLine($"I couldn't find the file: {fileName}");
+            }
+            break;
+        }    
+        } while (userInput != 5);
     }
-
-    public void DisplayAll() //displays all journal entries
-    {
-
-    }
-
-    public void SaveToFile(file) //need parameter; saves the journal to a file
-    {
-
-    }
-
-    public void LoadFromFile(file) //need parameter; loads the journal from a file
-    {
-
-    }
-}
-
-public class Entry //saves response, prompt, and date
-{
-    //state
-    public string _date;
-    public string _promptText;
-    public string _entryText;
-
-    //behavior
-    public void Display()
-    {
-
-    }
-
-}
-
-public class PromptGenerator
-{
-    //state
-    public List<string> _prompts = new List<string>();
-
-    //behavior
-    public string GetRandomPrompt()
-    {
-
-    }
-}
+}   
