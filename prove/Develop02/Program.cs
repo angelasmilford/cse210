@@ -1,81 +1,73 @@
 using System;
+using System.Formats.Asn1;
+using System.Net;
 
 class Program
 {
     static void Main(string[] args)
     {
         //instance 
-        Journal theJournal = new Journal();
-        Entry anEntry = new Entry();
-        anEntry.Display();
+        Journal theJournal = new Journal(); //Journal instance
+        Entry anEntry = new Entry(); //Entry instance
 
-    do {
-        const string MENU = "Please, select one of the following choices:\n1. Write\n2. Display\n3. Save\n4. Load\n5. Quit";
-        Console.WriteLine(MENU);
+        //info
+        Console.WriteLine("Welcome to the Journal Program!");
+        Console.WriteLine("Please select one of the following choices: ");
+        Console.WriteLine("1. Write");
+        Console.WriteLine("2. Display");
+        Console.WriteLine("3. Load");
+        Console.WriteLine("4. Save");
+        Console.WriteLine("5. Quit");
 
-        userInput = int.Parse(Console.ReadLine());
-        switch(userInput) //WRITE
+        //initializing value
+        int answer = 0;
+
+        Console.WriteLine("What would you like to do? ");
+        string response = Console.ReadLine();
+
+        //behavior; function; method
+        while(answer != 5)
         {
-            case 1:
-                Entry newEntry = new Entry();
-
-                newEntry._date = DateTime.Today.ToString("MM/dd/yyyy");
-                newEntry._prompt = prompt.GetPrompt();
-                Console.WriteLine($"{newEntry._prompt}");
-                newEntry._answer = Console.ReadLine();
-                journal._entries.Add(newEntry);
-                break;
             
-            //DISPLAY
-            case 2: 
-            journal.DisplayJournal();
-            break;
-            
-            //SAVE
-            case 3: 
-        
-            Console.WriteLine("What is the filename?");
-            string file = Console.ReadLine();
+            answer = int.Parse(response);
+            //answer = int.Parse(Console.ReadLine());
 
-            using (StreamWriter outputFile = new StreamWriter(file))
+            //if statement
+            if (answer == 1) //Write (NEEDS WORK)
             {
-                // Add text to the file 
-                foreach (Entry entry in journal._entries)
-                {
-                    outputFile.WriteLine($"Date: {entry._date} - {entry._prompt} {entry._answer}");
-                }     
-            };
-            break;
-        
-            // LOAD
-            case 4: 
-            Console.WriteLine("Enter the name of the file: ");
-            string fileName = Console.ReadLine();
-
-            if (File.Exists(fileName))
-            {
-                journal._entries.Clear();
-                string[] lines = System.IO.File.ReadAllLines(fileName);
-
-                foreach (string line in lines)
-                {
-                    char[] separators = {':','-', '?'};
-                    Entry reader = new Entry();
-                    string[] parts = line.Split(separators);
-
-                    reader._date = parts[1].Trim();
-                    reader._prompt = parts[2].Trim() + "?";
-                    reader._answer = parts[3].Trim();
-                    journal._entries.Add(reader);
-                }
+                theJournal.AddEntry(anEntry);
+                //prompt
+                anEntry.Display();
+                anEntry._entryText = Console.ReadLine();   
             }
-
+            
+            else if (answer == 2) //Display (NEEDS WORK)
+            {
+                
+                anEntry.Display(); //displays a single journal entry
+                theJournal.DisplayAll(); //displays all journal entries
+            }
+            
+            else if (answer == 3) //Load (NEEDS WORK)
+            {
+                theJournal.LoadFromFile(response); 
+            }
+            
+            else if (answer == 4) //Save (NEEDS WORK)
+            {   
+                theJournal.SaveToFile(response);
+            }
+            
+            else if (answer == 5) //Quit
+            {   
+                break;
+            }
+            
             else
             {
-                Console.WriteLine($"I couldn't find the file: {fileName}");
+                Console.WriteLine("Please answer with a single number from 1-5.");
             }
-            break;
-        }    
-        } while (userInput != 5);
+        }
+
     }
 }   

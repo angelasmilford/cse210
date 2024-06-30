@@ -1,13 +1,13 @@
 public class Resume
 {
     public string _name;
-    public List<Job> _jobs = new List<job>();
+    public List<Job> _jobs = new List<Job>();
     
     //method
     public void Display()
     {
-        Console.WriteLine($"Name: {name}");
-        Console.WriteLine($"Jobs: {jobs}");
+        Console.WriteLine($"Name: {_name}");
+        Console.WriteLine($"Jobs: {_jobs}");
 
         foreach (Job job in _jobs)
         {

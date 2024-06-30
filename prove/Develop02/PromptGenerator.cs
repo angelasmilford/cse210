@@ -7,7 +7,7 @@ public class PromptGenerator
 {
     public List<string> _prompts = new List<string>()
     {
-        "How did I feel today?",
+        "How did I feel today?",              
         "What am I grateful for today?",
         "What made me smile today?",
         "What did I learn today?",

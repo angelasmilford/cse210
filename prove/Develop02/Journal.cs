@@ -1,19 +1,18 @@
 using System;
 using System.IO;
+using System.IO.Enumeration;
 
 public class Journal
 //stores a list of journal entries
 {
-    //state; member variables; attributes
-    public List<Entry> _entries = new List<Entry>();
+    public List<Entry> _entries;
 
-    //behaviors; functions; methods
+    //NEEDS WORK
     public void AddEntry(Entry newEntry) //stores a list of Entry objects
     {
-        Console.Write(newEntry + "");
+        Console.WriteLine(newEntry + "");
         string answer = Console.ReadLine();
-        //date
-        _entries.Add(new Entry(_entryText, _promptText, _date));
+        _entries.Add(new Entry());
     }
 
     public void DisplayAll() //displays all journal entries
@@ -26,29 +25,42 @@ public class Journal
 
     public void SaveToFile(string file) //saves the journal to a file
     {
-        Console.Write("What is the filename? ");
-        string filename = Console.ReadLine();
-
+        Console.WriteLine("What is the filename? ");
+        string filename = Console.ReadLine() + ".txt";
+        
         using (StreamWriter outputFile = new StreamWriter(filename))
         {
-            foreach (Entry entry in _entries)
+            foreach (Entry anEntry in _entries)
             {
-                outputFile.WriteLine($"{entry._date}~~{entry._promptText}~~{entry._entryText}~~{entry.answer}");
+                outputFile.WriteLine($"{anEntry._date}~~{anEntry._promptText}");
+                outputFile.WriteLine($"{anEntry._entryText}");
             }
+
+            SaveToFile(file); //remove?
         }
     }
 
+    //NEEDS WORK
     public void LoadFromFile(string file) //loads the journal from a file
     {
-        Console.Write("What is the filename? ");
+        Console.WriteLine("What is the filename? ");
         string input = Console.ReadLine();
-        fileName = input + ".txt";
+        file = input + ".txt";
 
-        using (StreamReader reader = new StreamReader(fileName))
+        if (File.Exists(file))
         {
-            string headerLine = reader.ReadLine();
+            List<Entry> _entries = new List<Entry>();
 
+            string[] lines = System.IO.File.ReadAllLines(file);
+
+            foreach (string line in lines)
+            {
+                Console.WriteLine(line);
+            }   
         }
-        
+        else
+        {
+            Console.WriteLine("The file you requested does not exist.");
+        }
     }
 }
