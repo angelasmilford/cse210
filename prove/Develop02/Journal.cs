@@ -5,25 +5,25 @@ using System.IO.Enumeration;
 public class Journal
 //stores a list of journal entries
 {
-    public List<Entry> _entries;
+    public List<Entry> _entries = new List<Entry>();
 
     //NEEDS WORK
     public void AddEntry(Entry newEntry) //stores a list of Entry objects
     {
-        Console.WriteLine(newEntry + "");
-        string answer = Console.ReadLine();
-        _entries.Add(new Entry());
+        Console.WriteLine(newEntry._promptText);
+        newEntry._entryText = Console.ReadLine();
+        _entries.Add(newEntry);
     }
 
     public void DisplayAll() //displays all journal entries
     {
         foreach (Entry entry in _entries)
         {
-            Console.WriteLine(entry);
+            entry.Display();
         }
     }
 
-    public void SaveToFile(string file) //saves the journal to a file
+    public void SaveToFile() //saves the journal to a file
     {
         Console.WriteLine("What is the filename? ");
         string filename = Console.ReadLine() + ".txt";
@@ -35,23 +35,20 @@ public class Journal
                 outputFile.WriteLine($"{anEntry._date}~~{anEntry._promptText}");
                 outputFile.WriteLine($"{anEntry._entryText}");
             }
-
-            SaveToFile(file); //remove?
         }
     }
 
     //NEEDS WORK
-    public void LoadFromFile(string file) //loads the journal from a file
+    public void LoadFromFile() //loads the journal from a file
     {
         Console.WriteLine("What is the filename? ");
-        string input = Console.ReadLine();
-        file = input + ".txt";
+        string filename = Console.ReadLine() + ".txt";
 
-        if (File.Exists(file))
+        if (File.Exists(filename))
         {
             List<Entry> _entries = new List<Entry>();
 
-            string[] lines = System.IO.File.ReadAllLines(file);
+            string[] lines = System.IO.File.ReadAllLines(filename);
 
             foreach (string line in lines)
             {
