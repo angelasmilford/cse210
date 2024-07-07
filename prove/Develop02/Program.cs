@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+
 class Program
 {
     static void Main(string[] args)
@@ -9,48 +10,44 @@ class Program
 
         Console.WriteLine("Welcome to the Journal Program!");
 
-        while (true)
+        string file = @"C:\Users\angel\Documents\cse210-hw\prove\Develop02\Develop02.csproj";
+
+        bool quit = false;
+        while (!quit)
         {
-            Console.WriteLine("Please select one of the following choices: "); 
-            Console.WriteLine("1. Add Entry");
+            Console.WriteLine("Please select one of the following choices:");
+            Console.WriteLine("1. Write");
             Console.WriteLine("2. Display");
-            Console.WriteLine("3. Load");
-            Console.WriteLine("4. Save");
+            Console.WriteLine("3. Save");
+            Console.WriteLine("4. Load");
             Console.WriteLine("5. Quit");
 
-            Console.Write("What would you like to do? ");
-            string answer = Console.ReadLine();
-             
-            if (answer == "1")
-            {
-                theJournal.AddEntry(anEntry);
-                anEntry._entryText = Console.ReadLine();
-                return;
-            }
-            else if (answer == "2")
-            {
-                theJournal.DisplayAll();
-                continue;
-            }
-            else if (answer == "3")
-            {
-                theJournal.LoadFromFile();
-                continue;
-            }
-            else if (answer == "4")
-            {
-                theJournal.SaveToFile();
-                continue;
-            }
-            else if (answer ==  "5")
-            {
-                break;
-            }
-            else
-            {
-                Console.Write("Please answer with a single from the 1-5.");
-            }
+            Console.WriteLine("What would you like to do? ");
+            string choice = Console.ReadLine();
 
+            switch (choice)
+            {
+                case "1":
+                    theJournal.AddEntry(anEntry);
+                    anEntry._entryText = Console.ReadLine();
+                    break;
+                case "2":
+                    theJournal.DisplayAll();
+                    break;
+                case "3":
+                    theJournal.SaveToFile(file);
+                    break;
+                case "4":
+                    theJournal.LoadFromFile(file);
+                    break;
+                case "5":
+                    quit = true;
+                    break;
+                default:
+                    Console.WriteLine("Please response with a single from the 1-5.");
+                    break;
+            }
         }
+        
     }
 }

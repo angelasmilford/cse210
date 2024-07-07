@@ -1,21 +1,21 @@
 using System;
 using System.IO;
-using System.IO.Enumeration;
+using System.Net.Mime;
 
 public class Journal
-//stores a list of journal entries
 {
-    public List<Entry> _entries = new List<Entry>();
+    public List<Entry> _entries;
 
-    //NEEDS WORK
-    public void AddEntry(Entry newEntry) //stores a list of Entry objects
+
+    public void AddEntry(Entry newEntry)
     {
         Console.WriteLine(newEntry._promptText);
         newEntry._entryText = Console.ReadLine();
+
         _entries.Add(newEntry);
     }
 
-    public void DisplayAll() //displays all journal entries
+    public void DisplayAll()
     {
         foreach (Entry entry in _entries)
         {
@@ -23,41 +23,35 @@ public class Journal
         }
     }
 
-    public void SaveToFile() //saves the journal to a file
+    public void SaveToFile(string file)
     {
-        Console.WriteLine("What is the filename? ");
+        Console.WriteLine("What is the name of your file? ");
         string filename = Console.ReadLine() + ".txt";
-        
-        using (StreamWriter outputFile = new StreamWriter(filename))
+
+        using (StreamWriter writer = new StreamWriter(file, true))
         {
-            foreach (Entry anEntry in _entries)
-            {
-                outputFile.WriteLine($"{anEntry._date}~~{anEntry._promptText}");
-                outputFile.WriteLine($"{anEntry._entryText}");
-            }
+            writer.WriteLine(filename);
         }
     }
 
-    //NEEDS WORK
-    public void LoadFromFile() //loads the journal from a file
+    public void LoadFromFile(string file)
     {
-        Console.WriteLine("What is the filename? ");
+        Console.WriteLine("What is the name of your file? ");
         string filename = Console.ReadLine() + ".txt";
 
-        if (File.Exists(filename))
+        if (File.Exists(file))
         {
-            List<Entry> _entries = new List<Entry>();
-
-            string[] lines = System.IO.File.ReadAllLines(filename);
+            string[] lines = File.ReadAllLines(file);
 
             foreach (string line in lines)
             {
-                Console.WriteLine(line);
-            }   
+                Console.Write(line);
+            }
         }
         else
         {
-            Console.WriteLine("The file you requested does not exist.");
+            Console.WriteLine("The file you requested does not exist: " + file);
         }
+        
     }
 }
