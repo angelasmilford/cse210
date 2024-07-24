@@ -1,6 +1,5 @@
 public class Reference
 {
-    //state
     private string _book;
     private int _chapter;
     private int _verse;
@@ -8,7 +7,6 @@ public class Reference
     private int _endVerse;
 
 
-    //behavior
     public Reference(string book, int chapter, int verse)
     {
         _book = book;
@@ -19,9 +17,10 @@ public class Reference
     {
         _book = book;
         _chapter = chapter;
-        _startVerse = verse;
-        _endVerse = verse;
+        _startVerse = startVerse;
+        _endVerse = endVerse;
     }
+
 
     public string GetDisplayText()
     {

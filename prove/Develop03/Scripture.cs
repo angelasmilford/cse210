@@ -1,53 +1,34 @@
-using System.ComponentModel;
-
 public class Scripture
 {
-    //state
-    private Reference _reference; 
-    private List<Word> _words; //internally stores list of words
+    private Reference _reference;
+    private List<Word> _words;
 
 
-    //behavior
-    public Scripture(Reference Reference, string text) //keeps track of both the reference and scripture's text
+
+    public Scripture(Reference Reference, string text)
     {
-        _reference = new Reference();
-        _words = new List<Word>();
-
-        string[] splitText = text.Split(' ');
+        _reference = Reference;
         
-        foreach (string word in splitText)
+    }
+
+
+    public void HideRandomWords(int numberToHide)
+    {
+        Random random = new Random();
+        
+        foreach (Word word in _words)
         {
-            _words.Add(new Word(word));
+            word.Hide();
         }
     }
 
-    public void HideRandomWords(int numberToHide) //hides random words
+    public string GetDisplayText()
     {
-        Random randomWord = new Random();
-
-        string[] words = text.Split(' ');
-        StringBuilder randomWord = new StringBuilder();
-
-        foreach (string word in _words)
-        {
-            if (new Random().NextInt() < numberToHide)
-            {
-                randomWord.Append(new string('_', word.Length) + " ");
-            }
-            else
-            {
-                randomWord.Append(word + " ");
-            }
-        }
 
     }
-    public string GetDisplayText() //gets display text
-    {
-        Console.WriteLine($"{_reference}");
 
-    }
-    public bool IsCompletelyHidden() //checks to see if all the words of the scripture are hidden
+    public bool IsCompletelyHidden()
     {
-        return true;
+
     }
 }

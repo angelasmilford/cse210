@@ -1,52 +1,35 @@
 public class Word
 {
-    //state
     private string _text;
     private bool _isHidden;
 
 
-    //behavior
     public Word(string text)
     {
         _text = text;
-        _isHidden = false; 
+        Hide();
     }
 
-    public void Hide() //hides a word
-    {   
+
+    public void Hide()
+    {
         _isHidden = true;
+        _text = new string('_', _text.Length);
     }
-    public void Show() //shows a word
+
+    public void Show()
     {
         _isHidden = false;
-
-        _text = text;
-        Console.Clear();
-
-        Console.WriteLine($"{_text}");
-        for (var i = 0; i < _result.Length; i++)
-        {
-            var str = _result[i];
-            int len = str.Length;
-            string dashedLine = new String('_', len);
-            if (_hidden.Contains(i))
-            {
-                Console.Write($"{dashedLine} ");
-            }
-            else
-            {
-                Console.Write($"{str} ");
-            }
-        }
     }
-    public bool IsHidden() //checks to see if a word is hidden
+
+    public bool IsHidden()
     {
-        //get;
-        //set;
-        return _isHidden;
+        
+        return IsHidden();
     }
-    public string GetDisplayText() //displays the text
+
+    public string GetDisplayText()
     {
-        return _text;
+        
     }
 }

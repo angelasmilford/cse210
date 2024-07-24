@@ -12,20 +12,8 @@ class Program
         
         Console.WriteLine("");
         Console.WriteLine("Press enter to continue or type 'quit' to finish: ");
-        string response;
+        string response = Console.ReadLine();
         
-        while (response = ConsoleKey.Enter)
-        {
-            string response = Console.ReadLine();
-
-            if (respone == "")
-            {
-                scipture.HideRandomWords();
-            }
-            else if (response = "quit" || "Quit" || "QUIT")
-            {
-                break;
-            }
-        }
+        
     }
 }
