@@ -11,11 +11,9 @@ class Program
         method on each item and display the results.
         */
 
-        string runningDate = DateTime.Now.ToString("dd-MM-yyyy");
-
-        Running running = new Running(DateTime.Now, 30, 3);
+        Running running = new Running(DateTime.Now, 30, 3.0);
         Cycling cycling = new Cycling(DateTime.Now.AddDays(2), 45, 25);
-        Swimming swimming = new Swimming(DateTime.Now.AddDays(4), 25, 20);
+        Swimming swimming = new Swimming(DateTime.Now.AddDays(4), 50, 25);
 
 
         List <Activity> _activities = new List<Activity>();

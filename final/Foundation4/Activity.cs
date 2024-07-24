@@ -3,7 +3,7 @@ using System;
 public class Activity
 {
     protected DateTime _date;
-    private int _duration; //in minutes
+    protected int _duration; //in minutes
 
 
     public Activity(DateTime date, int duration)
@@ -43,7 +43,10 @@ public class Activity
     }
 }
 
-public class Running : Activity
+
+
+
+public class Running : Activity 
 {
     private double _distance;
 
@@ -65,19 +68,22 @@ public class Running : Activity
 
     public override double GetSpeed() 
     {
-        return (GetDistance() / GetTime()) * 60;
+        return GetDistance() / GetTime() * 60;
     }
 
     public override double GetPace()
     {
-        return 60 / GetSpeed();
+        return 60.0 / GetSpeed();
     }
 
     public override string GetSummary()
     {
-        return $"{_date} {GetExerciseName()} ({_duration} min) - Distance {GetDistance()} miles, Speed {GetSpeed()} mph, Pace: {GetPace()} min per mile";
+        return $"{_date} {GetExerciseName()} ({GetTime()} min) - Distance {GetDistance()} miles, Speed {GetSpeed()} mph, Pace: {GetPace()} min per mile";
     }
 }
+
+
+
 
 public class Cycling : Activity
 {
@@ -96,7 +102,7 @@ public class Cycling : Activity
 
     public override double GetDistance()
     {
-        return _speed * 12;    
+        return GetSpeed() / 60 * GetTime();    
     }
 
     public override double GetSpeed()
@@ -111,9 +117,12 @@ public class Cycling : Activity
 
     public override string GetSummary()
     {
-        return $"{_date} {GetExerciseName()} ({_duration} min) - Distance {GetDistance()} miles, Speed {GetSpeed()} mph, Pace: {GetPace()} min per mile";
+        return $"{_date} {GetExerciseName()} ({GetTime()} min) - Distance {GetDistance()} miles, Speed {GetSpeed()} mph, Pace: {GetPace()} min per mile";
     }
 }
+
+
+
 
 public class Swimming : Activity
 {
@@ -132,7 +141,7 @@ public class Swimming : Activity
 
     public override double GetDistance()
     {
-        return (_lapCount * 50) / 1000;        
+        return _lapCount * 50 / 1000;        
     }
 
     public override double GetSpeed() 
@@ -147,6 +156,6 @@ public class Swimming : Activity
 
     public override string GetSummary()
     {
-        return $"{_date} {GetExerciseName()} ({_duration} min) - Distance {GetDistance()} km, Speed {GetSpeed()} kph, Pace: {GetPace()} min per km";
+        return $"{_date} {GetExerciseName()} ({GetTime()} min) - Distance {GetDistance()} km, Speed {GetSpeed()} kph, Pace: {GetPace()} min per km";
     }
 }
