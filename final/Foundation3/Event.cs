@@ -30,12 +30,12 @@ public class Event
 
     public string GetStandardDetails() //lists title, description, datetime, and address
     {
-        return $"Title: {_title} | Description: {_description} | Date: {_date} | {_address}";
+        return $"Title: {_title} \nDescription: {_description} \nDate: {_date} \nAddress: {_address}";
     }
 
     public string GetFullDetails() //lists standard details plus event type and specific infromation
     {
-        return $"{GetStandardDetails()} | {GetEventTypeName()} | {GetDetails()}";
+        return $"{GetEventTypeName()} \n{GetStandardDetails()} \n{GetDetails()}";
     }
 
     public string GetShortDescription() //list type of event, title, and date
@@ -66,7 +66,7 @@ public class Lecture : Event
 
     public override string GetDetails() //NEEDS WORK
     {
-        return $"Speaker: {_speaker}, Capacity Limit: {_maxCapacity}";
+        return $"Speaker: {_speaker} \nCapacity Limit: {_maxCapacity}";
     }
 }
 
@@ -109,7 +109,7 @@ public class Outdoor : Event
     
     public override string GetEventTypeName()
     {
-        return "Outdoor Event";
+        return "Outdoor gathering";
     }
 
     public override string GetDetails()
