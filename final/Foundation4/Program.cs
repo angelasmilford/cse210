@@ -25,7 +25,9 @@ class Program
 
         foreach (Activity activity in _activities)
         {
+            Console.WriteLine();
             Console.WriteLine(activity.GetSummary());
+            Console.WriteLine();
         }
     }
 }
